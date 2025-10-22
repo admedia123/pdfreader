@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../utils/theme.dart';
+import '../services/ads_manager_simple.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -36,9 +37,21 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _navigateToHome() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 2), () async {
       if (mounted) {
-        Navigator.pushReplacementNamed(context, '/permission');
+        // Show App Open Ad before navigating
+        try {
+          print('Attempting to show App Open Ad...');
+          await AdsManager.instance.showAppOpenAd();
+          print('App Open Ad shown successfully');
+          // Wait for ad to be visible
+          await Future.delayed(const Duration(seconds: 2));
+        } catch (e) {
+          print('App Open Ad error: $e');
+        }
+        if (mounted) {
+          Navigator.pushReplacementNamed(context, '/permission');
+        }
       }
     });
   }

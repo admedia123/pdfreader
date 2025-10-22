@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/pdf_file.dart';
 import '../models/user_profile.dart';
@@ -12,7 +13,8 @@ class SupabaseService {
 
   // Supabase configuration
   static const String supabaseUrl = 'https://dsoykdntfuumsymjcfkm.supabase.co';
-  static const String supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzb3lrZG50ZnV1bXN5bWpjZmttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExMDQ1MDksImV4cCI6MjA3NjY4MDUwOX0.pv0vLyBFJ3XzMyEZv5f0qjdKuAWqY2ORQphcnKFIRUA';
+  static const String supabaseAnonKey =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzb3lrZG50ZnV1bXN5bWpjZmttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExMDQ1MDksImV4cCI6MjA3NjY4MDUwOX0.pv0vLyBFJ3XzMyEZv5f0qjdKuAWqY2ORQphcnKFIRUA';
 
   Future<void> initialize() async {
     await Supabase.initialize(
@@ -80,8 +82,9 @@ class SupabaseService {
 
     // Upload file to Supabase Storage
     final fileBytes = await File(filePath).readAsBytes();
+    final originalFileName = filePath.split('/').last;
     final fileName =
-        '${user.id}/${DateTime.now().millisecondsSinceEpoch}_$fileName';
+        '${user.id}/${DateTime.now().millisecondsSinceEpoch}_$originalFileName';
 
     await _client.storage.from('pdf_files').uploadBinary(fileName, fileBytes);
 
@@ -250,4 +253,3 @@ class SupabaseService {
         .subscribe();
   }
 }
-

@@ -313,6 +313,54 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.3"
+  firebase_performance:
+    dependency: "direct main"
+    description:
+      name: firebase_performance
+      sha256: dcfb4d674502866f0489a8ce0d96e0d43e0129375cea8bb73183a5ea02b4c4de
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.11.1+1"
+  firebase_performance_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_performance_platform_interface
+      sha256: "0aa72711d65bf0001dbcb4ce5fa1e38549dbf97afcfc522af4a44f351a6933fa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6+1"
+  firebase_performance_web:
+    dependency: transitive
+    description:
+      name: firebase_performance_web
+      sha256: "7bcbe2676d225dc66aa90d28a9f4b49d75a8484be9a87171aa1263a3eb2d0693"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.7+20"
+  firebase_remote_config:
+    dependency: "direct main"
+    description:
+      name: firebase_remote_config
+      sha256: "0f419efb00503e285bc7000e0e5dfc1dca9f390ea004091a01d35a798b22923c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.0"
+  firebase_remote_config_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_remote_config_platform_interface
+      sha256: e6513edd1d58079f5fe335858d2febc6baadad77a9e8852401ac48af4344b5b4
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.4"
+  firebase_remote_config_web:
+    dependency: transitive
+    description:
+      name: firebase_remote_config_web
+      sha256: "8ab5354403d2221873ed5870c6c9a0370819d69dc7bdfc03a445cde32e841de2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.9.0"
   fixnum:
     dependency: transitive
     description:
@@ -400,6 +448,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.0"
+  google_mobile_ads:
+    dependency: "direct main"
+    description:
+      name: google_mobile_ads
+      sha256: "0d4a3744b5e8ed1b8be6a1b452d309f811688855a497c6113fc4400f922db603"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.1"
   gotrue:
     dependency: transitive
     description:
@@ -998,7 +1054,7 @@ packages:
     source: hosted
     version: "1.4.0"
   url_launcher:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: url_launcher
       sha256: f6a7e5c4835bb4e3026a04793a4199ca2d14c739ec378fdfe23fc8075d0439f8
@@ -1109,6 +1165,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+  webview_flutter:
+    dependency: transitive
+    description:
+      name: webview_flutter
+      sha256: c3e4fe614b1c814950ad07186007eff2f2e5dd2935eba7b9a9a1af8e5885f1ba
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.13.0"
+  webview_flutter_android:
+    dependency: transitive
+    description:
+      name: webview_flutter_android
+      sha256: "9a25f6b4313978ba1c2cda03a242eea17848174912cfb4d2d8ee84a556f248e3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.10.1"
+  webview_flutter_platform_interface:
+    dependency: transitive
+    description:
+      name: webview_flutter_platform_interface
+      sha256: "63d26ee3aca7256a83ccb576a50272edd7cfc80573a4305caa98985feb493ee0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.14.0"
+  webview_flutter_wkwebview:
+    dependency: transitive
+    description:
+      name: webview_flutter_wkwebview
+      sha256: fb46db8216131a3e55bcf44040ca808423539bc6732e7ed34fb6d8044e3d512f
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.23.0"
   win32:
     dependency: transitive
     description:

@@ -15,16 +15,22 @@ class AppTheme {
       seedColor: primaryColor,
       brightness: Brightness.light,
     ),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: primaryColor,
-      foregroundColor: Colors.white,
+    scaffoldBackgroundColor: AppColors.lightBackground,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.lightBackground,
+      foregroundColor: AppColors.textPrimaryLight,
       elevation: 0,
-      centerTitle: true,
+      centerTitle: false,
+      titleTextStyle: TextStyle(
+        color: AppColors.textPrimaryLight,
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+      ),
     ),
     cardTheme: CardThemeData(
-      color: cardColor,
+      color: AppColors.lightCard,
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -33,19 +39,25 @@ class AppTheme {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
       headlineLarge: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
-        color: textColor,
+        color: AppColors.textPrimaryLight,
       ),
       headlineMedium: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w600,
-        color: textColor,
+        color: AppColors.textPrimaryLight,
       ),
-      bodyLarge: TextStyle(fontSize: 16, color: textColor),
-      bodyMedium: TextStyle(fontSize: 14, color: secondaryTextColor),
+      bodyLarge: TextStyle(fontSize: 16, color: AppColors.textPrimaryLight),
+      bodyMedium: TextStyle(fontSize: 14, color: AppColors.textSecondaryLight),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.lightSurface,
+      selectedItemColor: primaryColor,
+      unselectedItemColor: AppColors.textSecondaryLight,
+      type: BottomNavigationBarType.fixed,
     ),
   );
 

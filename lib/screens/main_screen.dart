@@ -6,6 +6,7 @@ import 'favorites_screen.dart';
 import 'recent_screen.dart';
 import 'settings_screen.dart';
 import 'test_connection_screen.dart';
+import 'ads_test_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -24,6 +25,7 @@ class _MainScreenState extends State<MainScreen> {
     const FavoritesScreen(),
     const SettingsScreen(),
     const TestConnectionScreen(),
+    const AdsTestScreen(),
   ];
 
   @override
@@ -135,10 +137,14 @@ class _MainScreenState extends State<MainScreen> {
               activeIcon: Icon(Icons.bug_report),
               label: 'Test',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.ads_click_outlined),
+              activeIcon: Icon(Icons.ads_click),
+              label: 'Ads',
+            ),
           ],
         ),
       ),
     );
   }
 }
-

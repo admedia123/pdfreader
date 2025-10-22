@@ -61,6 +61,29 @@ class PDFFile {
       password: password ?? this.password,
     );
   }
+
+  // JSON serialization
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'path': path,
+      'size': size,
+      'dateModified': dateModified.toIso8601String(),
+      'thumbnailPath': thumbnailPath,
+      'isPasswordProtected': isPasswordProtected,
+      'password': password,
+    };
+  }
+
+  factory PDFFile.fromJson(Map<String, dynamic> json) {
+    return PDFFile(
+      name: json['name'] as String,
+      path: json['path'] as String,
+      size: json['size'] as int,
+      dateModified: DateTime.parse(json['dateModified'] as String),
+      thumbnailPath: json['thumbnailPath'] as String?,
+      isPasswordProtected: json['isPasswordProtected'] as bool? ?? false,
+      password: json['password'] as String?,
+    );
+  }
 }
-
-

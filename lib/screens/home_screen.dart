@@ -7,6 +7,8 @@ import '../services/pdf_service.dart';
 import '../widgets/pdf_card.dart';
 import '../widgets/floating_action_buttons.dart';
 import '../utils/app_colors.dart';
+import '../services/ads_manager_simple.dart';
+import '../widgets/safe_banner_ad_widget.dart';
 import 'pdf_viewer_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -212,149 +214,167 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.darkBackground,
-      appBar: AppBar(
-        backgroundColor: AppColors.darkBackground,
-        title: const Text('PDF Reader'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: _HomeSearchDelegate(_pdfFiles),
-              );
-            },
-          ),
-          IconButton(
-            icon: Icon(_isGridView ? Icons.list : Icons.grid_view),
-            onPressed: () {
-              setState(() {
-                _isGridView = !_isGridView;
-              });
-              _savePreferences();
-            },
-          ),
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              setState(() {
-                _sortBy = value;
-              });
-              _savePreferences();
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(value: 'name', child: Text('Sort by Name')),
-              const PopupMenuItem(value: 'date', child: Text('Sort by Date')),
-              const PopupMenuItem(value: 'size', child: Text('Sort by Size')),
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: AppColors.darkBackground,
+          appBar: AppBar(
+            backgroundColor: AppColors.darkBackground,
+            title: const Text('PDF Reader'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {
+                  showSearch(
+                    context: context,
+                    delegate: _HomeSearchDelegate(_pdfFiles),
+                  );
+                },
+              ),
+              IconButton(
+                icon: Icon(_isGridView ? Icons.list : Icons.grid_view),
+                onPressed: () {
+                  setState(() {
+                    _isGridView = !_isGridView;
+                  });
+                  _savePreferences();
+                },
+              ),
+              PopupMenuButton<String>(
+                onSelected: (value) {
+                  setState(() {
+                    _sortBy = value;
+                  });
+                  _savePreferences();
+                },
+                itemBuilder: (context) => [
+                  const PopupMenuItem(
+                      value: 'name', child: Text('Sort by Name')),
+                  const PopupMenuItem(
+                      value: 'date', child: Text('Sort by Date')),
+                  const PopupMenuItem(
+                      value: 'size', child: Text('Sort by Size')),
+                ],
+                icon: const Icon(Icons.sort),
+              ),
             ],
-            icon: const Icon(Icons.sort),
           ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                const Text(
-                  'SORT',
-                  style: TextStyle(
-                    color: AppColors.textPrimary,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    const Text(
+                      'SORT',
+                      style: TextStyle(
+                        color: AppColors.textPrimary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Icon(
+                      Icons.sort,
+                      color: AppColors.textSecondary,
+                      size: 16,
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 8),
-                const Icon(
-                  Icons.sort,
-                  color: AppColors.textSecondary,
-                  size: 16,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: _isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : _filteredAndSortedFiles.isEmpty
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.picture_as_pdf_outlined,
-                              size: 80,
-                              color: Colors.grey[400],
+              ),
+              Expanded(
+                child: _isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : _filteredAndSortedFiles.isEmpty
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.picture_as_pdf_outlined,
+                                  size: 80,
+                                  color: Colors.grey[400],
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  _searchQuery.isEmpty
+                                      ? 'No PDF files found'
+                                      : 'No PDF files match your search',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.grey[600],
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  _searchQuery.isEmpty
+                                      ? 'Tap the + button to add PDF files'
+                                      : 'Try a different search term',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey[500],
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 16),
-                            Text(
-                              _searchQuery.isEmpty
-                                  ? 'No PDF files found'
-                                  : 'No PDF files match your search',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              _searchQuery.isEmpty
-                                  ? 'Tap the + button to add PDF files'
-                                  : 'Try a different search term',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey[500],
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : _isGridView
-                        ? GridView.builder(
-                            padding: const EdgeInsets.all(16),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 0.8,
-                              crossAxisSpacing: 16,
-                              mainAxisSpacing: 16,
-                            ),
-                            itemCount: _filteredAndSortedFiles.length,
-                            itemBuilder: (context, index) {
-                              final pdfFile = _filteredAndSortedFiles[index];
-                              return PDFCard(
-                                pdfFile: pdfFile,
-                                onTap: () => _openPDF(pdfFile),
-                                onDelete: () => _deletePDF(pdfFile),
-                                onToggleFavorite: () =>
-                                    _toggleFavorite(pdfFile),
-                              );
-                            },
                           )
-                        : ListView.builder(
-                            padding: const EdgeInsets.all(16),
-                            itemCount: _filteredAndSortedFiles.length,
-                            itemBuilder: (context, index) {
-                              final pdfFile = _filteredAndSortedFiles[index];
-                              return PDFCard(
-                                pdfFile: pdfFile,
-                                onTap: () => _openPDF(pdfFile),
-                                onDelete: () => _deletePDF(pdfFile),
-                                isListView: true,
-                                onToggleFavorite: () =>
-                                    _toggleFavorite(pdfFile),
-                              );
-                            },
-                          ),
+                        : _isGridView
+                            ? GridView.builder(
+                                padding: const EdgeInsets.all(16),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 0.8,
+                                  crossAxisSpacing: 16,
+                                  mainAxisSpacing: 16,
+                                ),
+                                itemCount: _filteredAndSortedFiles.length,
+                                itemBuilder: (context, index) {
+                                  final pdfFile =
+                                      _filteredAndSortedFiles[index];
+                                  return PDFCard(
+                                    pdfFile: pdfFile,
+                                    onTap: () => _openPDF(pdfFile),
+                                    onDelete: () => _deletePDF(pdfFile),
+                                    onToggleFavorite: () =>
+                                        _toggleFavorite(pdfFile),
+                                  );
+                                },
+                              )
+                            : ListView.builder(
+                                padding: const EdgeInsets.all(16),
+                                itemCount: _filteredAndSortedFiles.length,
+                                itemBuilder: (context, index) {
+                                  final pdfFile =
+                                      _filteredAndSortedFiles[index];
+                                  return PDFCard(
+                                    pdfFile: pdfFile,
+                                    onTap: () => _openPDF(pdfFile),
+                                    onDelete: () => _deletePDF(pdfFile),
+                                    isListView: true,
+                                    onToggleFavorite: () =>
+                                        _toggleFavorite(pdfFile),
+                                  );
+                                },
+                              ),
+              ),
+            ],
           ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButtons(
-        onPickPDF: _pickPDFFile,
-        onConvertImages: _convertImagesToPDF,
-      ),
+          // FAB moved to Stack below
+        ),
+        // Floating Action Buttons - Positioned to avoid ads
+        FloatingActionButtons(
+          onPickPDF: _pickPDFFile,
+          onConvertImages: _convertImagesToPDF,
+        ),
+        // Banner Ad - Safe implementation
+        const Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: SafeBannerAdWidget(),
+        ),
+      ],
     );
   }
 }

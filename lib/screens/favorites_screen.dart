@@ -4,6 +4,7 @@ import '../models/pdf_file.dart';
 import '../services/pdf_service.dart';
 import '../utils/app_colors.dart';
 import '../widgets/pdf_card.dart';
+import '../widgets/safe_banner_ad_widget.dart';
 import 'pdf_viewer_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
@@ -147,82 +148,97 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.darkBackground,
-      appBar: AppBar(
-        backgroundColor: AppColors.darkBackground,
-        title: const Text('Favorites'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: _FavoritesSearchDelegate(_favoriteFiles),
-              );
-            },
-          ),
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              setState(() {
-                _sortBy = value;
-              });
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(value: 'name', child: Text('Sort by Name')),
-              const PopupMenuItem(value: 'date', child: Text('Sort by Date')),
-              const PopupMenuItem(value: 'size', child: Text('Sort by Size')),
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: AppColors.darkBackground,
+          appBar: AppBar(
+            backgroundColor: AppColors.darkBackground,
+            title: const Text('Favorites'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {
+                  showSearch(
+                    context: context,
+                    delegate: _FavoritesSearchDelegate(_favoriteFiles),
+                  );
+                },
+              ),
+              PopupMenuButton<String>(
+                onSelected: (value) {
+                  setState(() {
+                    _sortBy = value;
+                  });
+                },
+                itemBuilder: (context) => [
+                  const PopupMenuItem(
+                      value: 'name', child: Text('Sort by Name')),
+                  const PopupMenuItem(
+                      value: 'date', child: Text('Sort by Date')),
+                  const PopupMenuItem(
+                      value: 'size', child: Text('Sort by Size')),
+                ],
+                icon: const Icon(Icons.sort),
+              ),
             ],
-            icon: const Icon(Icons.sort),
           ),
-        ],
-      ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : _favoriteFiles.isEmpty
-              ? _buildEmptyState()
-              : Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        children: [
-                          const Text(
-                            'SORT',
-                            style: TextStyle(
-                              color: AppColors.textPrimary,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
+          body: _isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : _favoriteFiles.isEmpty
+                  ? _buildEmptyState()
+                  : Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            children: [
+                              const Text(
+                                'SORT',
+                                style: TextStyle(
+                                  color: AppColors.textPrimary,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              const Icon(
+                                Icons.sort,
+                                color: AppColors.textSecondary,
+                                size: 16,
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 8),
-                          const Icon(
-                            Icons.sort,
-                            color: AppColors.textSecondary,
-                            size: 16,
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            itemCount: _filteredAndSortedFiles.length,
+                            itemBuilder: (context, index) {
+                              final pdfFile = _filteredAndSortedFiles[index];
+                              return PDFCard(
+                                pdfFile: pdfFile,
+                                onTap: () => _openPDF(pdfFile),
+                                onDelete: () => _deletePDF(pdfFile),
+                                isListView: true,
+                                isFavorite: true,
+                                onToggleFavorite: () =>
+                                    _toggleFavorite(pdfFile),
+                              );
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: ListView.builder(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        itemCount: _filteredAndSortedFiles.length,
-                        itemBuilder: (context, index) {
-                          final pdfFile = _filteredAndSortedFiles[index];
-                          return PDFCard(
-                            pdfFile: pdfFile,
-                            onTap: () => _openPDF(pdfFile),
-                            onDelete: () => _deletePDF(pdfFile),
-                            isListView: true,
-                            isFavorite: true,
-                            onToggleFavorite: () => _toggleFavorite(pdfFile),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+        ),
+        // Banner Ad - Safe implementation
+        const Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: SafeBannerAdWidget(),
+        ),
+      ],
     );
   }
 
@@ -329,4 +345,3 @@ class _FavoritesSearchDelegate extends SearchDelegate {
     );
   }
 }
-

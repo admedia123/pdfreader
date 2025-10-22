@@ -29,6 +29,17 @@ class AppColors {
   static const Color textPrimaryDark = Colors.white;
   static const Color textSecondaryDark = Color(0xFFB0B0B0);
 
+  // Light Theme Colors
+  static const Color lightBackground = Color(0xFFF5F5F5);
+  static const Color lightSurface = Color(0xFFFFFFFF);
+  static const Color lightCard = Color(0xFFFFFFFF);
+  static const Color lightBorder = Color(0xFFE0E0E0);
+
+  // Text Colors for Light Theme
+  static const Color textPrimaryLight = Color(0xFF212121);
+  static const Color textSecondaryLight = Color(0xFF757575);
+  static const Color textHintLight = Color(0xFF9E9E9E);
+
   // Status Colors
   static const Color success = Color(0xFF4CAF50);
   static const Color warning = Color(0xFFFF9800);

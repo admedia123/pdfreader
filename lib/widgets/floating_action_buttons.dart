@@ -52,53 +52,55 @@ class _FloatingActionButtonsState extends State<FloatingActionButtons>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        if (_isExpanded) ...[
-          ScaleTransition(
-            scale: _scaleAnimation,
-            child: FloatingActionButton(
-              heroTag: "convert_images",
-              onPressed: () {
-                widget.onConvertImages();
-                _toggleExpanded();
-              },
-              backgroundColor: Colors.orange,
-              child: const Icon(Icons.image, color: Colors.white),
+    return Positioned(
+      bottom: 140, // Move up to avoid ads
+      right: 16,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          if (_isExpanded) ...[
+            ScaleTransition(
+              scale: _scaleAnimation,
+              child: FloatingActionButton(
+                heroTag: "convert_images",
+                onPressed: () {
+                  widget.onConvertImages();
+                  _toggleExpanded();
+                },
+                backgroundColor: Colors.orange,
+                child: const Icon(Icons.image, color: Colors.white),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ScaleTransition(
+              scale: _scaleAnimation,
+              child: FloatingActionButton(
+                heroTag: "pick_pdf",
+                onPressed: () {
+                  widget.onPickPDF();
+                  _toggleExpanded();
+                },
+                backgroundColor: Colors.blue,
+                child: const Icon(Icons.upload_file, color: Colors.white),
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
+          FloatingActionButton(
+            heroTag: "main_fab",
+            onPressed: _toggleExpanded,
+            backgroundColor: Theme.of(context).primaryColor,
+            child: AnimatedRotation(
+              turns: _isExpanded ? 0.125 : 0.0,
+              duration: const Duration(milliseconds: 200),
+              child: Icon(
+                _isExpanded ? Icons.close : Icons.add,
+                color: Colors.white,
+              ),
             ),
           ),
-          const SizedBox(height: 16),
-          ScaleTransition(
-            scale: _scaleAnimation,
-            child: FloatingActionButton(
-              heroTag: "pick_pdf",
-              onPressed: () {
-                widget.onPickPDF();
-                _toggleExpanded();
-              },
-              backgroundColor: Colors.blue,
-              child: const Icon(Icons.upload_file, color: Colors.white),
-            ),
-          ),
-          const SizedBox(height: 16),
         ],
-        FloatingActionButton(
-          heroTag: "main_fab",
-          onPressed: _toggleExpanded,
-          backgroundColor: Theme.of(context).primaryColor,
-          child: AnimatedRotation(
-            turns: _isExpanded ? 0.125 : 0.0,
-            duration: const Duration(milliseconds: 200),
-            child: Icon(
-              _isExpanded ? Icons.close : Icons.add,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
-
-

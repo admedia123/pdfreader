@@ -1,0 +1,104 @@
+{
+  "parameters": {
+    "ads_enabled": {
+      "defaultValue": {
+        "value": "true"
+      }
+    },
+    "ads_network_priority": {
+      "defaultValue": {
+        "value": "admob,applovin"
+      }
+    },
+    "admob_enabled": {
+      "defaultValue": {
+        "value": "true"
+      }
+    },
+    "applovin_enabled": {
+      "defaultValue": {
+        "value": "true"
+      }
+    },
+    "banner_frequency": {
+      "defaultValue": {
+        "value": "30"
+      }
+    },
+    "interstitial_frequency": {
+      "defaultValue": {
+        "value": "60"
+      }
+    },
+    "rewarded_cooldown": {
+      "defaultValue": {
+        "value": "300"
+      }
+    },
+    "app_open_delay": {
+      "defaultValue": {
+        "value": "5"
+      }
+    },
+    "admob_banner_id": {
+      "defaultValue": {
+        "value": "ca-app-pub-3940256099942544/6300978111"
+      }
+    },
+    "admob_interstitial_id": {
+      "defaultValue": {
+        "value": "ca-app-pub-3940256099942544/1033173712"
+      }
+    },
+    "admob_rewarded_id": {
+      "defaultValue": {
+        "value": "ca-app-pub-3940256099942544/5224354917"
+      }
+    },
+    "admob_app_open_id": {
+      "defaultValue": {
+        "value": "ca-app-pub-3940256099942544/3419835294"
+      }
+    },
+    "applovin_sdk_key": {
+      "defaultValue": {
+        "value": "YOUR_APPLOVIN_SDK_KEY"
+      }
+    },
+    "applovin_banner_id": {
+      "defaultValue": {
+        "value": "YOUR_APPLOVIN_BANNER_ID"
+      }
+    },
+    "applovin_interstitial_id": {
+      "defaultValue": {
+        "value": "YOUR_APPLOVIN_INTERSTITIAL_ID"
+      }
+    },
+    "applovin_rewarded_id": {
+      "defaultValue": {
+        "value": "YOUR_APPLOVIN_REWARDED_ID"
+      }
+    },
+    "applovin_app_open_id": {
+      "defaultValue": {
+        "value": "YOUR_APPLOVIN_APP_OPEN_ID"
+      }
+    },
+    "network_analysis_enabled": {
+      "defaultValue": {
+        "value": "true"
+      }
+    },
+    "network_timeout": {
+      "defaultValue": {
+        "value": "10"
+      }
+    },
+    "network_retry_count": {
+      "defaultValue": {
+        "value": "3"
+      }
+    }
+  }
+}

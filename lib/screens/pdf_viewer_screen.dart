@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:share_plus/share_plus.dart';
 import '../models/pdf_file.dart';
+import '../services/ads_manager_simple.dart';
 
 class PDFViewerScreen extends StatefulWidget {
   final PDFFile pdfFile;
@@ -90,7 +91,9 @@ class _PDFViewerScreenState extends State<PDFViewerScreen> {
     _pdfViewController.setPage(page);
   }
 
-  void _sharePDF() {
+  void _sharePDF() async {
+    // Show interstitial ad before sharing
+    await AdsManager.instance.showInterstitialAd();
     Share.shareXFiles([XFile(widget.pdfFile.path)]);
   }
 
