@@ -5,6 +5,7 @@ import 'home_screen.dart';
 import 'favorites_screen.dart';
 import 'recent_screen.dart';
 import 'settings_screen.dart';
+import 'test_connection_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -22,6 +23,7 @@ class _MainScreenState extends State<MainScreen> {
     const RecentScreen(),
     const FavoritesScreen(),
     const SettingsScreen(),
+    const TestConnectionScreen(),
   ];
 
   @override
@@ -127,6 +129,11 @@ class _MainScreenState extends State<MainScreen> {
               icon: Icon(Icons.settings_outlined),
               activeIcon: Icon(Icons.settings),
               label: 'Settings',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.bug_report_outlined),
+              activeIcon: Icon(Icons.bug_report),
+              label: 'Test',
             ),
           ],
         ),
