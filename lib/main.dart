@@ -6,6 +6,7 @@ import 'screens/main_screen.dart';
 import 'screens/pdf_viewer_screen.dart';
 import 'screens/permission_screen.dart';
 import 'services/firebase_service.dart';
+import 'services/supabase_service.dart';
 import 'utils/theme.dart';
 import 'models/pdf_file.dart';
 
@@ -14,6 +15,9 @@ void main() async {
   
   // Initialize Firebase
   await FirebaseService.instance.initialize();
+  
+  // Initialize Supabase
+  await SupabaseService.instance.initialize();
   
   runApp(const PDFReaderApp());
 }

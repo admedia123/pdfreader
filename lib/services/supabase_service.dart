@@ -11,8 +11,8 @@ class SupabaseService {
   late SupabaseClient _client;
 
   // Supabase configuration
-  static const String supabaseUrl = 'YOUR_SUPABASE_URL';
-  static const String supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+  static const String supabaseUrl = 'https://dsoykdntfuumsymjcfkm.supabase.co';
+  static const String supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzb3lrZG50ZnV1bXN5bWpjZmttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExMDQ1MDksImV4cCI6MjA3NjY4MDUwOX0.pv0vLyBFJ3XzMyEZv5f0qjdKuAWqY2ORQphcnKFIRUA';
 
   Future<void> initialize() async {
     await Supabase.initialize(
