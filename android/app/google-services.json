@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "123456789",
-    "project_id": "pdf-reader-app",
-    "storage_bucket": "pdf-reader-app.appspot.com"
+    "project_id": "high-pdf-reader",
+    "storage_bucket": "high-pdf-reader.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:123456789:android:abcdef123456",
         "android_client_info": {
-          "package_name": "com.example.pdf_reader"
+          "package_name": "com.highmyx.pdfreaderapp"
         }
       },
       "oauth_client": [

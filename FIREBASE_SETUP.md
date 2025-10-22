@@ -4,12 +4,12 @@
 
 ### **Package Name:**
 ```
-com.example.pdf_reader
+com.highmyx.pdfreaderapp
 ```
 
 ### **App Name:**
 ```
-PDF Reader
+High PDF Reader
 ```
 
 ---
@@ -20,7 +20,7 @@ PDF Reader
 
 1. **Truy cập**: [console.firebase.google.com](https://console.firebase.google.com)
 2. **Click "Create a project"**
-3. **Project name**: `pdf-reader-app`
+3. **Project name**: `high-pdf-reader`
 4. **Enable Google Analytics**: ✅
 5. **Analytics account**: Create new hoặc chọn existing
 6. **Click "Create project"**
@@ -28,8 +28,8 @@ PDF Reader
 ### **Step 2: Add Android App**
 
 1. **Click "Add app"** → **Android icon**
-2. **Android package name**: `com.example.pdf_reader`
-3. **App nickname**: `PDF Reader`
+2. **Android package name**: `com.highmyx.pdfreaderapp`
+3. **App nickname**: `High PDF Reader`
 4. **Debug signing certificate SHA-1**: (để trống cho development)
 5. **Click "Register app"**
 
@@ -72,15 +72,15 @@ PDF Reader
 {
   "project_info": {
     "project_number": "123456789",
-    "project_id": "pdf-reader-app",
-    "storage_bucket": "pdf-reader-app.appspot.com"
+    "project_id": "high-pdf-reader",
+    "storage_bucket": "high-pdf-reader.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:123456789:android:abcdef123456",
         "android_client_info": {
-          "package_name": "com.example.pdf_reader"
+          "package_name": "com.highmyx.pdfreaderapp"
         }
       },
       "api_key": [
