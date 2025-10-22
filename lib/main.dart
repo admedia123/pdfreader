@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'screens/splash_screen.dart';
 import 'screens/main_screen.dart';
 import 'screens/pdf_viewer_screen.dart';
 import 'screens/permission_screen.dart';
+import 'services/firebase_service.dart';
 import 'utils/theme.dart';
 import 'models/pdf_file.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Firebase
+  await FirebaseService.instance.initialize();
+  
   runApp(const PDFReaderApp());
 }
 
